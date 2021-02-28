@@ -4,14 +4,15 @@ import {
   CloseButton,
   Grid,
   AlertTitle,
+  Flex,
 } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { fetchNews } from '../../api/api';
 import CardComponents from './Card/Card';
 import ProgressBar from '../ProgressBar/ProgressBar';
+import { fetchNews } from '../../api/api';
 
 const NewsCard = (request, { category }) => {
-  const [newsCard, setNewsCard] = useState([]);
+  const [newsCard, setNewsCard] = useState();
   const [error, setError] = useState(false);
   const [load, setLoad] = useState(true);
 
@@ -35,9 +36,9 @@ const NewsCard = (request, { category }) => {
         rowGap={10}
         mr={5}
         ml={5}
-        templateColumns={{
-          lg: 'repeat(3,1fr)',
-          md: 'repeat(auto-fit, minmax(300px,1fr))',
+        gridTemplateColumns={{
+          lg: 'repeat(auto, 1fr, auto)',
+          md: 'repeat(auto-fit, minmax(300px, 1fr))',
         }}
       >
         {newsCard
@@ -45,6 +46,8 @@ const NewsCard = (request, { category }) => {
               return <CardComponents key={index} props={article} />;
             })
           : null}
+      </Grid>
+      <Flex>
         {error
           ? index => (
               <Alert status="error" key={index}>
@@ -54,7 +57,7 @@ const NewsCard = (request, { category }) => {
               </Alert>
             )
           : null}
-      </Grid>
+      </Flex>
     </>
   );
 };

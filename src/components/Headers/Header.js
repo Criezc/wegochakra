@@ -42,7 +42,7 @@ const links = [
   { url: '/?category=tesla', label: 'Tesla' },
   { url: '/?category=microsoft', label: 'Microsoft' },
   { url: '/?category=google', label: 'Google' },
-  { url: '/?category=netflix', label: 'Netflix' },
+  { url: '/?category=android', label: 'Android' },
   { url: '/?category=apple', label: 'Apple' },
   { url: '/?category=samsung', label: 'Samsung' },
   { url: '/?category=playstation', label: 'PlayStation' },
@@ -50,7 +50,7 @@ const links = [
   { url: '/?category=iot', label: 'IoT' },
 ];
 
-const Navbar = props => {
+const Navbar = (props, { handleClick }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);

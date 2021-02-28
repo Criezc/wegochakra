@@ -4,6 +4,14 @@ import './Card.scss';
 
 const CardComponents = ({ props }) => {
   props.publishedAt = new Date(props.publishedAt).toUTCString();
+  if (props.author === null) {
+    props.author = '-';
+  } else {
+    if (props.author.search(/(https:)|(http:)/i) === 0) {
+      const x = props.author.split('/');
+      props.author = x[x.length - 1];
+    }
+  }
 
   return (
     <>
@@ -15,7 +23,8 @@ const CardComponents = ({ props }) => {
           boxShadow="sm"
           bg="gray.200"
           border="2px solid #319795"
-          h="600px"
+          h="100%"
+          boxSizing="border-box"
         >
           <Image
             alt={props.author}
@@ -24,8 +33,9 @@ const CardComponents = ({ props }) => {
             mb={5}
             objectFit="cover"
             className="img-card"
-            w="100%"
             borderRadius="md"
+            height="200px"
+            width="100%"
           />
           <Box>
             <Stack isInline align="baseline">
@@ -34,11 +44,11 @@ const CardComponents = ({ props }) => {
                 rounded="full"
                 px={2}
                 colorScheme="teal"
-                ml={3}
+                ml={1}
               >
                 {props.source.name}
               </Badge>
-              <Badge variant="solid" rounded="full" px={2} colorScheme="teal">
+              <Badge variant="solid" rounded="full" colorScheme="teal">
                 {props.publishedAt}
               </Badge>
             </Stack>
@@ -67,9 +77,10 @@ const CardComponents = ({ props }) => {
               <Badge
                 variant="solid"
                 rounded="full"
-                px={2}
+                px={3}
                 colorScheme="teal"
-                ml={3}
+                ml={4}
+                my={2}
               >
                 Author : {props.author}
               </Badge>

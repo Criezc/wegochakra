@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const apiKey = 'ed1e5bba34ee4c6799328cb1ffc33d57';
+const apiKey = '9195cb6adde24a579f9db8ba642f21dd';
 const url = 'https://newsapi.org/v2';
 
 export const fetchNews = async request => {
@@ -9,6 +9,7 @@ export const fetchNews = async request => {
       params: {
         q: request.query,
         pageSize: request.results,
+        page: request.page,
         apiKey: apiKey,
       },
     })
@@ -20,15 +21,8 @@ export const fetchNews = async request => {
     });
 };
 
-export const fetchSources = async () => {
+export const fetchSource = async request => {
   const requestSource = `sources?apiKey=`;
-  try {
-    const {
-      data: { sources },
-    } = await axios.get(`${url}/${requestSource}${apiKey}`);
-
-    return sources.map(source => source);
-  } catch (error) {
-    return error;
-  }
+  const res = await axios.get(`${url}/${requestSource}${apiKey}`);
+  return res.data.sources;
 };

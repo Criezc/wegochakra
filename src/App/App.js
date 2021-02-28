@@ -6,9 +6,8 @@ import NewsSection from '../components/NewsSection/NewsSection';
 import Footer from '../components/Footer/Footer';
 import SearchBar from '../components/SearchBar/SearchBar';
 import { RingLoader } from 'react-spinners';
-
-import './App.scss';
 import SourceBar from '../components/SourceBar/SourceBar';
+import './App.scss';
 
 function App() {
   const [active, setActive] = useState('');
