@@ -2,69 +2,26 @@ This project was bootstrapped with [Chakra UI](https://github.com/chakra-ui/chak
 
 Chakra UI is a simple, modular and accessible component library that gives you the building blocks you need to build your React applications.
 
-## Available Scripts
+Technical Specs Technical Specs adalah spesifikasi yang diinginkan dari sebuah aplikasi. Jadi, memenuhi spesifikasi yang diminta untuk sebuah project aplikasi adalah tugas dari engineering team dan juga project manager.
 
-In the project directory, you can run:
+Tujuan Membuat sebuah aplikasi web dengan menggunakan React sebagai library, yang berfungsi sebagai news aggregator. Dengan tampilan utama adalah untuk mobile web platform. Tanpa ada tampilan untuk desktop web platform.
 
-### `yarn start`
+Product Features Beberapa fitur yang harus ada di aplikasi adalah:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+User dapat melihat berita technology terikini. User dapat membuka link berita ke domain original dari source berita. User dapat melakukan scroll untuk melihat-lihat berita (vertical scrolling). User dapat melihat info seperti tanggal, sumber, penulis, dan deskripsi singkat di masing-masing thumbnail berita. User dapat mengganti berita yang tersaji berdasarkan button category di bagian Navbar. User dapat melihat loading state, dalam bentuk sebuah loader UI, saat proses pengambilan data fetching sedang dalam proses. User dapat melihat error state, dalam bentuk sebuah text UI, saat proses pengambilan data fetching mengalami kegagalan. API Untuk API yang akan digunakan sebagai data-source dari semua berita. Gunakan NewsAPI https://newsapi.org/account. Buat sebuah akun untuk mendapatkan API Key yang dapat dilihat nantinya di halaman https://newsapi.org/account. Gunakan email dan mendaftar-lah seperti biasa. Untuk default berita, dapat mengambil data dari endpoint berikut: https://newsapi.org/v2/everything?q=technology&apiKey={API_KEY}
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Untuk default berita, dapat mengambil data dari endpoint berikut: https://newsapi.org/v2/everything?q=technology&apiKey={API_KEY}
 
-### `yarn test`
+Dengan menggunakan endpoint di atas, maka berita-berita yang tersaji sebagai default adalah yang berhubungan dengan technology.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Untuk "bermain" dengan API endpoints, dapat menggunakan tools seperti Postman atau Insomnia.
 
-### `yarn build`
+Tools Untuk membuat project aplikasi ini, dibebaskan untuk membuat React app dengan tools/template yang paling dirasa sesuai dengan keinginan. Bisa menggunakan Create React App, Next.js, Gatsby, atau bahkan jika ingin membuat boilerplate React dari nol dan men-setup webpack, babel, dll sendiri.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Tapi disarankan menggunakan Create React App saja. Karena paling mudah dan tidak ada paksaan untuk membuat aplikasi React yang advanced (SSR atau SSG).
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Gunakan axios untuk library fetching. Jangan menggunakan fetch API.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+User Interfaces Buatlah sebuah aplikasi dengan UI seperti pada contoh di bawah. Tidak perlu mendesign terlalu mirip. Jika merasa design dengan pendekatan lain lebih bagus. Silahkan gunakan design itu.
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Gunakan library styling yang sesuai keinginan. Boleh menggunakan CSS Module jika menggunakan Create React App, styled-components, emotion, TailwindCSS, ataupun Bootstrap (jika dirasa paling familiar).
