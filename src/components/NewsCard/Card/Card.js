@@ -3,7 +3,6 @@ import React from 'react';
 import './Card.scss';
 
 const CardComponents = ({ props }) => {
-  props.publishedAt = new Date(props.publishedAt).toUTCString();
   if (props.author === null) {
     props.author = '-';
   } else {
@@ -13,6 +12,17 @@ const CardComponents = ({ props }) => {
     }
   }
 
+  var options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+  props.publishedAt = new Date(props.publishedAt).toLocaleDateString(
+    'en-US',
+    options
+  );
+
   return (
     <>
       <a href={props.url} rel="noopener noreferrer">
@@ -21,7 +31,7 @@ const CardComponents = ({ props }) => {
           rounded="20px"
           overflow="hidden"
           boxShadow="sm"
-          bg="gray.200"
+          bg="gray.300"
           border="2px solid #319795"
           h="100%"
           boxSizing="border-box"
@@ -39,13 +49,7 @@ const CardComponents = ({ props }) => {
           />
           <Box>
             <Stack isInline align="baseline">
-              <Badge
-                variant="solid"
-                rounded="full"
-                px={2}
-                colorScheme="teal"
-                ml={1}
-              >
+              <Badge variant="solid" rounded="full" colorScheme="teal" ml={1}>
                 {props.source.name}
               </Badge>
               <Badge variant="solid" rounded="full" colorScheme="teal">
@@ -60,6 +64,7 @@ const CardComponents = ({ props }) => {
               mx={5}
               textAlign="start"
               lineHeight="short"
+              fontFamily="sans-serif"
             >
               {props.title}
             </Text>
@@ -68,8 +73,9 @@ const CardComponents = ({ props }) => {
               fontWeight="medium"
               my={8}
               mx={5}
-              noOfLines={[3]}
               textAlign="start"
+              fontFamily="mono"
+              noOfLines={[3, 4]}
             >
               {props.description}
             </Text>
@@ -79,7 +85,7 @@ const CardComponents = ({ props }) => {
                 rounded="full"
                 px={3}
                 colorScheme="teal"
-                ml={4}
+                ml={1}
                 my={2}
               >
                 Author : {props.author}

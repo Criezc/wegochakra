@@ -5,52 +5,41 @@ import { ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons';
 export default function Paginator({ pageContext, handleClick }) {
   return (
     <Flex justifyContent="center">
-      <Stack direction="row" spacing={4} align="center" py={5}>
+      <Stack
+        direction="row"
+        spacing={{
+          md: '2',
+          lg: '4',
+        }}
+        align="center"
+        py={5}
+      >
         <Button
           colorScheme="teal"
-          className={`action ${pageContext === 1 ? 'disabled' : null}`}
-          name="previous"
-          onClick={e => handleClick(e)}
+          name="prevTabs"
+          onClick={evt => handleClick(evt)}
         >
           <ArrowLeftIcon />
         </Button>
-        <Button
-          colorScheme="teal"
-          className={pageContext === 1 ? 'active' : null}
-          name="1"
-          onClick={e => handleClick(e)}
-        >
+        <Button colorScheme="teal" name="1" onClick={evt => handleClick(evt)}>
           1
         </Button>
-        <Button
-          colorScheme="teal"
-          className={pageContext === 2 ? 'active' : null}
-          name="2"
-          onClick={e => handleClick(e)}
-        >
+        <Button colorScheme="teal" name="2" onClick={evt => handleClick(evt)}>
           2
         </Button>
-        <Button
-          colorScheme="teal"
-          className={pageContext === 3 ? 'active' : null}
-          name="3"
-          onClick={e => handleClick(e)}
-        >
+        <Button colorScheme="teal" name="3" onClick={evt => handleClick(evt)}>
           3
         </Button>
-        <Button
-          colorScheme="teal"
-          className={pageContext === 4 ? 'active' : null}
-          name="4"
-          onClick={e => handleClick(e)}
-        >
+        <Button colorScheme="teal" name="4" onClick={evt => handleClick(evt)}>
           4
+        </Button>
+        <Button name="5" onClick={evt => handleClick(evt)} colorScheme="teal">
+          5
         </Button>
         <Button
           colorScheme="teal"
-          className={`action ${pageContext === 4 ? 'disabled' : null} `}
-          name="next"
-          onClick={e => handleClick(e)}
+          name="nextTabs"
+          onClick={evt => handleClick(evt)}
         >
           <ArrowRightIcon />
         </Button>

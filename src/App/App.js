@@ -4,10 +4,9 @@ import Navbar from '../components/Headers/Header';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NewsSection from '../components/NewsSection/NewsSection';
 import Footer from '../components/Footer/Footer';
-import SearchBar from '../components/SearchBar/SearchBar';
 import { RingLoader } from 'react-spinners';
-import SourceBar from '../components/SourceBar/SourceBar';
 import './App.scss';
+import BackToTop from '../components/BackToTop/Back';
 
 function App() {
   const [active, setActive] = useState('');
@@ -45,8 +44,6 @@ function App() {
         ) : (
           <Router>
             <Navbar active={active} />
-            <SearchBar />
-            <SourceBar />
             <Switch>
               <Route
                 exact
@@ -60,6 +57,7 @@ function App() {
               ></Route>
             </Switch>
             <Footer />
+            <BackToTop />
           </Router>
         )}
       </div>

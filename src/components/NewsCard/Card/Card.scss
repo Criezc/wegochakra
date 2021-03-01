@@ -11,7 +11,6 @@
 
 
     &:hover{
-        transform: scale(1.1);
         transition: ease-in-out 1000ms;
         @include grayscale_element(0)
     }

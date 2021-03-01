@@ -11,7 +11,7 @@ import CardComponents from './Card/Card';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import { fetchNews } from '../../api/api';
 
-const NewsCard = (request, { category }) => {
+const NewsCard = (request, { category, pages }) => {
   const [newsCard, setNewsCard] = useState();
   const [error, setError] = useState(false);
   const [load, setLoad] = useState(true);
@@ -26,7 +26,8 @@ const NewsCard = (request, { category }) => {
       setNewsCard(result);
     };
     fetchData();
-  }, [request, category]);
+    return () => {};
+  }, [request, category, pages]);
 
   return (
     <>

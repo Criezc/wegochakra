@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import Paginator from '../Paginator/Paginator';
+import SearchBar from '../SearchBar/SearchBar';
+import SourceBar from '../SourceBar/SourceBar';
 const queryString = require('query-string');
 
 const NewsSection = props => {
@@ -13,28 +15,40 @@ const NewsSection = props => {
     }
   }, [category, props]);
 
-  const [pageContext, setPageContext] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const handleChange = e => {
-    const paginator = e.target.name;
-    if (paginator === 'next' && pageContext < 4) {
-      setPageContext(pageContext + 1);
-    } else if (paginator === 'previous' && pageContext > 1) {
-      setPageContext(pageContext - 1);
-    } else if (paginator !== 'next' && paginator !== 'previous') {
-      setPageContext(parseInt(paginator));
+  const [postPerPage] = useState(12);
+
+  const handlePage = evt => {
+    const paginate = evt.target.name;
+    if (paginate === 'nextTabs' && currentPage < 5) {
+      setCurrentPage(currentPage + 1);
+    } else if (paginate === 'prevTabs' && currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    } else if (paginate !== 'nextTabs' && paginate !== 'prevTabs') {
+      setCurrentPage(parseInt(paginate));
     }
+  };
+
+  const [search, setSearch] = useState();
+
+  const handleSearch = e => {
+    setSearch(e);
   };
 
   return (
     <>
-      <Paginator pageContext={pageContext} handleClick={e => handleChange(e)} />
-
+      <SearchBar handlePage={e => handleSearch(e)} />
+      <SourceBar />
+      <Paginator
+        currentPage={currentPage}
+        handleClick={evt => handlePage(evt)}
+      />
       <NewsCard
-        category="everything"
+        category="top-headlines"
         query={category === undefined ? '' : category}
-        results="9"
-        page={pageContext}
+        results={postPerPage}
+        page={currentPage}
       />
     </>
   );

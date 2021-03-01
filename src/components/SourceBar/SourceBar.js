@@ -3,7 +3,7 @@ import { Flex, Select } from '@chakra-ui/react';
 import React, { useState, useEffect } from 'react';
 import { fetchSource } from '../../api/api';
 
-const SourceBar = request => {
+const SourceBar = (request, { handleChange }) => {
   const [sources, setSource] = useState([]);
 
   useEffect(() => {
@@ -36,7 +36,11 @@ const SourceBar = request => {
           icon={<ChevronDownIcon />}
         >
           {sources.map((source, index) => (
-            <option key={index} value={source.id}>
+            <option
+              key={index}
+              value={source.id}
+              onClick={e => handleChange(e)}
+            >
               {source.name}
             </option>
           ))}
