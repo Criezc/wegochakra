@@ -13,9 +13,9 @@ export default function Paginator({ page, handleClick }) {
     }
   };
 
-  const isDisabled = getDisabled(page);
+  // const isDisabled = getDisabled(page);
 
-  console.log(page);
+  // console.log(page);
 
   return (
     <Flex justifyContent="center">
@@ -32,7 +32,7 @@ export default function Paginator({ page, handleClick }) {
           colorScheme="teal"
           name="prevTabs"
           onClick={evt => handleClick(evt)}
-          isDisabled={isDisabled}
+          // isDisabled={isDisabled}
         >
           <ArrowLeftIcon />
         </Button>
