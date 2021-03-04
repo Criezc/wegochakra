@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import Paginator from '../Paginator/Paginator';
 import SearchBar from '../SearchBar/SearchBar';
-import SourceBar from '../SourceBar/SourceBar';
+// import SourceBar from '../SourceBar/SourceBar';
 const queryString = require('query-string');
 
 const NewsSection = props => {
   const category = queryString.parse(props.location.search).category;
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage] = useState(12);
 
   useEffect(() => {
     props.setActiveTab(category);
@@ -14,10 +16,6 @@ const NewsSection = props => {
       window.location.href = '/?category=technology';
     }
   }, [category, props]);
-
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const [postPerPage] = useState(12);
 
   const handlePage = evt => {
     const paginate = evt.target.name;
@@ -30,16 +28,10 @@ const NewsSection = props => {
     }
   };
 
-  const [search, setSearch] = useState();
-
-  const handleSearch = e => {
-    setSearch(e);
-  };
-
   return (
     <>
-      <SearchBar handlePage={e => handleSearch(e)} />
-      <SourceBar />
+      <SearchBar />
+      {/* <SourceBar /> */}
       <Paginator
         currentPage={currentPage}
         handleClick={evt => handlePage(evt)}

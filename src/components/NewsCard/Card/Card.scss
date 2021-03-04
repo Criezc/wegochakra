@@ -7,12 +7,16 @@
 
 .img-card {
     cursor: pointer;
-    @include grayscale_element(100%);
+}
 
-
-    &:hover{
-        transition: ease-in-out 1000ms;
-        @include grayscale_element(0)
+@media (min-width: 768px){
+    .img-card {
+        cursor: pointer;
+        @include grayscale_element(100%);
+        &:hover{
+            transition: ease-in-out 1000ms;
+            @include grayscale_element(0)
+        }
     }
 }
 

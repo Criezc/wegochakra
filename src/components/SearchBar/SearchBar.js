@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 
-const SearchBar = ({ handleChange }) => {
+const SearchBar = () => {
   return (
     <Flex as="form" mx={3} my={5} pt={1}>
       <Box

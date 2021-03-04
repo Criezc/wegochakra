@@ -11,8 +11,8 @@ import CardComponents from './Card/Card';
 import ProgressBar from '../ProgressBar/ProgressBar';
 import { fetchNews } from '../../api/api';
 
-const NewsCard = (request, { category, pages }) => {
-  const [newsCard, setNewsCard] = useState();
+const NewsCard = (request, { category, page }) => {
+  const [newsCard, setNewsCard] = useState([]);
   const [error, setError] = useState(false);
   const [load, setLoad] = useState(true);
 
@@ -26,17 +26,16 @@ const NewsCard = (request, { category, pages }) => {
       setNewsCard(result);
     };
     fetchData();
-    return () => {};
-  }, [request, category, pages]);
+  }, [request, category]);
 
   return (
     <>
       {load ? <ProgressBar /> : null}
       <Grid
-        columnGap={20}
+        columnGap={18}
         rowGap={10}
-        mr={5}
-        ml={5}
+        mr={3}
+        ml={3}
         gridTemplateColumns={{
           lg: 'repeat(auto, 1fr, auto)',
           md: 'repeat(auto-fit, minmax(300px, 1fr))',

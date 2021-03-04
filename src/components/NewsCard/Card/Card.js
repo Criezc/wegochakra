@@ -25,7 +25,7 @@ const CardComponents = ({ props }) => {
 
   return (
     <>
-      <a href={props.url} rel="noopener noreferrer">
+      <a href={props.url} rel="noopener noreferrer" target="_blank">
         <Box
           w="100%"
           rounded="20px"
