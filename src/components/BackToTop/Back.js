@@ -22,7 +22,14 @@ export default function BackToTop() {
   };
 
   useEffect(() => {
-    window.addEventListener('scroll', toggleVisible);
+    let isMount = true;
+
+    if (isMount) {
+      window.addEventListener('scroll', toggleVisible);
+    }
+    return () => {
+      isMount = false;
+    };
   }, []);
 
   return (

@@ -1,22 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Flex, Button, Stack } from '@chakra-ui/react';
 import { ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons';
 
-export default function Paginator({ page, handleClick }) {
-  const [disabled, setDisabled] = useState(true);
-
-  const getDisabled = () => {
-    if (page === 5 || page === 1) {
-      setDisabled(true);
-    } else {
-      setDisabled(false);
-    }
-  };
-
-  // const isDisabled = getDisabled(page);
-
-  // console.log(page);
-
+export default function Paginator({ handleClick, page }) {
   return (
     <Flex justifyContent="center">
       <Stack
@@ -32,7 +18,6 @@ export default function Paginator({ page, handleClick }) {
           colorScheme="teal"
           name="prevTabs"
           onClick={evt => handleClick(evt)}
-          // isDisabled={isDisabled}
         >
           <ArrowLeftIcon />
         </Button>

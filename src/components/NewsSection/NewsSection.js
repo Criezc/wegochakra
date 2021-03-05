@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import Paginator from '../Paginator/Paginator';
 import SearchBar from '../SearchBar/SearchBar';
-// import SourceBar from '../SourceBar/SourceBar';
+// import SearchBar from '../SearchBar/SearchBar';
 const queryString = require('query-string');
 
 const NewsSection = props => {
   const category = queryString.parse(props.location.search).category;
   const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage] = useState(12);
 
   useEffect(() => {
     props.setActiveTab(category);
@@ -32,15 +31,13 @@ const NewsSection = props => {
     <>
       <SearchBar />
       {/* <SourceBar /> */}
-      <Paginator
-        currentPage={currentPage}
-        handleClick={evt => handlePage(evt)}
-      />
+      <Paginator page={currentPage} handleClick={evt => handlePage(evt)} />
       <NewsCard
         category="top-headlines"
         query={category === undefined ? '' : category}
-        results={postPerPage}
+        // results={postPerPage}
         page={currentPage}
+        // domains={domains}
       />
     </>
   );

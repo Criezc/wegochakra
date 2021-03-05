@@ -1,19 +1,18 @@
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import { Flex, Select } from '@chakra-ui/react';
-import React, { useState, useEffect } from 'react';
-import { fetchSource } from '../../api/api';
+import React from 'react';
 
-const SourceBar = (request, { handleChange }) => {
-  const [sources, setSource] = useState([]);
+const domainList = [
+  { url: '&domains=theverge.com', label: 'The Verge' },
+  { url: '&domains=techcrunch.com', label: 'Techcrunch' },
+  { url: '&domains=engadget.com', label: 'Engadget' },
+  { url: '&domains=cnn.com', label: 'Crypto Coin News' },
+  { url: '&domains=arstechnica.com', label: 'Ars Technica' },
+  { url: '&domains=thenextweb.com', label: 'The Next Web' },
+  { url: '&domains=wired.com', label: 'Wired' },
+];
 
-  useEffect(() => {
-    const fetchApi = async () => {
-      const results = await fetchSource(request);
-      setSource(results);
-    };
-    fetchApi();
-  }, [request]);
-
+const SourceBar = () => {
   return (
     <>
       <Flex my={5} pt={1}>
@@ -35,14 +34,8 @@ const SourceBar = (request, { handleChange }) => {
           }}
           icon={<ChevronDownIcon />}
         >
-          {sources.map((source, index) => (
-            <option
-              key={index}
-              value={source.id}
-              onClick={e => handleChange(e)}
-            >
-              {source.name}
-            </option>
+          {domainList.map((domain, index) => (
+            <option key={index}>{domain.label}</option>
           ))}
         </Select>
       </Flex>

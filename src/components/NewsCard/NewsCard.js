@@ -13,17 +13,23 @@ import { fetchNews } from '../../api/api';
 
 const NewsCard = (request, { category, page }) => {
   const [newsCard, setNewsCard] = useState([]);
-  const [error, setError] = useState(false);
+  const [isError, setError] = useState(false);
   const [load, setLoad] = useState(true);
 
   useEffect(() => {
     setLoad(true);
     setError(false);
+
     const fetchData = async () => {
-      const result = await fetchNews(request)
-        .catch(error => console.log(error))
-        .finally(() => setLoad(false));
-      setNewsCard(result);
+      try {
+        const result = await fetchNews(request);
+        setNewsCard(result);
+      } catch (error) {
+        setError(true);
+        return console.error(error);
+      } finally {
+        return setLoad(false);
+      }
     };
     fetchData();
   }, [request, category]);
@@ -37,7 +43,7 @@ const NewsCard = (request, { category, page }) => {
         mr={3}
         ml={3}
         gridTemplateColumns={{
-          lg: 'repeat(auto, 1fr, auto)',
+          lg: 'repeat(auto,1fr,auto)',
           md: 'repeat(auto-fit, minmax(300px, 1fr))',
         }}
       >
@@ -48,7 +54,7 @@ const NewsCard = (request, { category, page }) => {
           : null}
       </Grid>
       <Flex>
-        {error
+        {isError
           ? index => (
               <Alert status="error" key={index}>
                 <AlertIcon />

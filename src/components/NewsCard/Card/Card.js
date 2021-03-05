@@ -1,10 +1,11 @@
 import { Badge, Box, Image, Stack, Text } from '@chakra-ui/react';
 import React from 'react';
 import './Card.scss';
+import { notFound } from '../../../Assets/index';
 
 const CardComponents = ({ props }) => {
   if (props.author === null) {
-    props.author = '-';
+    props.author = 'Undefined';
   } else {
     if (props.author.search(/(https:)|(http:)/i) === 0) {
       const x = props.author.split('/');
@@ -12,16 +13,16 @@ const CardComponents = ({ props }) => {
     }
   }
 
-  var options = {
-    weekday: 'long',
+  let options = {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
   };
   props.publishedAt = new Date(props.publishedAt).toLocaleDateString(
-    'en-US',
+    'en-EN',
     options
   );
+  props.urlToImage = props.urlToImage ?? notFound;
 
   return (
     <>
@@ -47,9 +48,10 @@ const CardComponents = ({ props }) => {
             height="200px"
             width="100%"
           />
+
           <Box>
             <Stack isInline align="baseline">
-              <Badge variant="solid" rounded="full" colorScheme="teal" ml={1}>
+              <Badge variant="solid" rounded="full" colorScheme="teal" ml={5}>
                 {props.source.name}
               </Badge>
               <Badge variant="solid" rounded="full" colorScheme="teal">

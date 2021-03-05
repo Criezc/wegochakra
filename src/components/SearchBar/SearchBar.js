@@ -3,8 +3,19 @@ import { Box, Flex } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 
 const SearchBar = () => {
+  const [input, setInput] = React.useState('');
+
+  const handleChange = events => {
+    setInput(events.target.value);
+  };
+
+  const handleSubmit = events => {
+    events.preventDefault();
+    setInput('');
+  };
+
   return (
-    <Flex as="form" mx={3} my={5} pt={1}>
+    <Flex as="form" mx={3} my={5} pt={1} onSubmit={handleSubmit}>
       <Box
         as="input"
         placeholder="Search a news..."
@@ -22,6 +33,8 @@ const SearchBar = () => {
           boxShadow: 'outline',
           borderColor: 'gray.300',
         }}
+        onChange={handleChange}
+        value={input}
       />
       <Box
         as="button"
