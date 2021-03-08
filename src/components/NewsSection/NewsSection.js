@@ -1,44 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import NewsCard from '../NewsCard/NewsCard';
 import Paginator from '../Paginator/Paginator';
 import SearchBar from '../SearchBar/SearchBar';
-// import SearchBar from '../SearchBar/SearchBar';
-const queryString = require('query-string');
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 const NewsSection = props => {
-  const category = queryString.parse(props.location.search).category;
-  const [currentPage, setCurrentPage] = useState(1);
-
-  useEffect(() => {
-    props.setActiveTab(category);
-    if (category === undefined) {
-      window.location.href = '/?category=technology';
-    }
-  }, [category, props]);
-
-  const handlePage = evt => {
-    const paginate = evt.target.name;
-    if (paginate === 'nextTabs' && currentPage < 5) {
-      setCurrentPage(currentPage + 1);
-    } else if (paginate === 'prevTabs' && currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+  const handlePage = events => {
+    const paginate = events.target.name;
+    if (paginate === 'nextTabs' && props.currentPage < 5) {
+      props.onChangePage(this.props.currentPage + 1);
+    } else if (paginate === 'prevTabs' && props.currentPage > 1) {
+      props.onChangePage(this.props.currentPage - 1);
     } else if (paginate !== 'nextTabs' && paginate !== 'prevTabs') {
-      setCurrentPage(parseInt(paginate));
+      props.onChangePage(parseInt(paginate));
     }
+  };
+
+  const handleSearchTerm = events => {
+    props.onSearch(events === null || events === '' ? 'technology' : events);
   };
 
   return (
     <>
-      <SearchBar />
-      {/* <SourceBar /> */}
-      <Paginator page={currentPage} handleClick={evt => handlePage(evt)} />
-      <NewsCard
-        category="top-headlines"
-        query={category === undefined ? '' : category}
-        // results={postPerPage}
-        page={currentPage}
-        // domains={domains}
-      />
+      <SearchBar handleChange={handleSearchTerm} />
+      <Paginator page={props.currentPage} handleClick={handlePage} />
+      {props.isLoading ? <ProgressBar /> : null}
+      <NewsCard category="top-headlines" data={props.data} />
     </>
   );
 };

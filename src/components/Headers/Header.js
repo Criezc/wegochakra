@@ -14,7 +14,7 @@ const MenuItem = ({ children, isLast, to = '/', ...rest }) => {
   );
 };
 
-const MenuLinks = ({ isOpen }) => {
+const MenuLinks = ({ isOpen, onSearch }) => {
   return (
     <Box
       display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
@@ -28,7 +28,13 @@ const MenuLinks = ({ isOpen }) => {
         pt={[4, 4, 0, 0]}
       >
         {links.map((link, index) => (
-          <MenuItem key={index} to={link.url}>
+          <MenuItem
+            key={index}
+            onClick={e => {
+              e.preventDefault();
+              onSearch(link.name);
+            }}
+          >
             {link.label}
           </MenuItem>
         ))}
@@ -38,19 +44,19 @@ const MenuLinks = ({ isOpen }) => {
 };
 
 const links = [
-  { url: '/?category=technology', label: 'Home' },
-  { url: '/?category=tesla', label: 'Tesla' },
-  { url: '/?category=microsoft', label: 'Microsoft' },
-  { url: '/?category=google', label: 'Google' },
-  { url: '/?category=android', label: 'Android' },
-  { url: '/?category=apple', label: 'Apple' },
-  { url: '/?category=samsung', label: 'Samsung' },
-  { url: '/?category=playstation', label: 'PlayStation' },
-  { url: '/?category=amazon', label: 'Amazon' },
-  { url: '/?category=iot', label: 'IoT' },
+  { name: 'technology', label: 'Home' },
+  { name: 'tesla', label: 'Tesla' },
+  { name: 'microsoft', label: 'Microsoft' },
+  { name: 'google', label: 'Google' },
+  { name: 'android', label: 'Android' },
+  { name: 'apple', label: 'Apple' },
+  { name: 'samsung', label: 'Samsung' },
+  { name: 'playstation', label: 'PlayStation' },
+  { name: 'amazon', label: 'Amazon' },
+  { name: 'iot', label: 'IoT' },
 ];
 
-const Navbar = (props, { handleClick }) => {
+const Navbar = props => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
@@ -59,7 +65,7 @@ const Navbar = (props, { handleClick }) => {
     <NavBarContainer {...props}>
       <Logo />
       <MenuToggle toggle={toggle} isOpen={isOpen} />
-      <MenuLinks isOpen={isOpen} />
+      <MenuLinks isOpen={isOpen} onSearch={props.onSearch} />
     </NavBarContainer>
   );
 };

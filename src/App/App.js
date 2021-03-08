@@ -1,28 +1,65 @@
-import React, { useEffect, useState } from 'react';
-import { ChakraProvider, Flex, theme } from '@chakra-ui/react';
+import React from 'react';
+import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  ChakraProvider,
+  CloseButton,
+  Flex,
+  theme,
+} from '@chakra-ui/react';
 import Navbar from '../components/Headers/Header';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import NewsSection from '../components/NewsSection/NewsSection';
 import Footer from '../components/Footer/Footer';
 import { RingLoader } from 'react-spinners';
 import './App.scss';
 import BackToTop from '../components/BackToTop/Back';
+import { fetchNews } from '../api/api';
 
 function App() {
-  const [active, setActive] = useState('');
+  const [loading, setLoading] = React.useState(false);
+  const [data, setData] = React.useState([]);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [query, setQuery] = React.useState('technology');
+  const [isError, setIsError] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
 
-  const [loading, setLoading] = useState(false);
-
-  function handleActive(tab) {
-    setActive(tab);
+  async function fetchData() {
+    try {
+      setIsLoading(true);
+      const result = await fetchNews({
+        q: query,
+        page: currentPage,
+      });
+      setData(result);
+    } catch (error) {
+      setIsError(true);
+      return console.error(error);
+    } finally {
+      return setIsLoading(false);
+    }
   }
 
-  useEffect(() => {
+  function handleChangePage(page) {
+    setCurrentPage(page);
+  }
+
+  function handleSearch(text) {
+    setQuery(text);
+    setCurrentPage(1);
+  }
+
+  React.useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 3000);
+    fetchData();
   }, []);
+
+  React.useEffect(() => {
+    fetchData();
+  }, [currentPage, query]);
 
   return (
     <ChakraProvider theme={theme}>
@@ -42,23 +79,32 @@ function App() {
             />
           </Flex>
         ) : (
-          <Router>
-            <Navbar active={active} />
-            <Switch>
-              <Route
-                exact
-                path="/"
-                component={props => (
-                  <NewsSection
-                    {...props}
-                    setActiveTab={handleActive}
-                  ></NewsSection>
-                )}
-              ></Route>
-            </Switch>
+          <>
+            <Navbar onSearch={handleSearch} />
+            <NewsSection
+              isLoading={isLoading}
+              onChangePage={handleChangePage}
+              currentPage={currentPage}
+              onSearch={handleSearch}
+              query={query}
+              data={data}
+            ></NewsSection>
+            <Flex>
+              {isError
+                ? index => (
+                    <Alert status="error" key={index}>
+                      <AlertIcon />
+                      <AlertTitle mr={2}>
+                        Something error please try again
+                      </AlertTitle>
+                      <CloseButton position="absolute" right="8px" top="8px" />
+                    </Alert>
+                  )
+                : null}
+            </Flex>
             <Footer />
             <BackToTop />
-          </Router>
+          </>
         )}
       </div>
     </ChakraProvider>

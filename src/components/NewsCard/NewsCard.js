@@ -1,42 +1,10 @@
-import {
-  Alert,
-  AlertIcon,
-  CloseButton,
-  Grid,
-  AlertTitle,
-  Flex,
-} from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import { Grid } from '@chakra-ui/react';
+import React from 'react';
 import CardComponents from './Card/Card';
-import ProgressBar from '../ProgressBar/ProgressBar';
-import { fetchNews } from '../../api/api';
 
-const NewsCard = (request, { category, page }) => {
-  const [newsCard, setNewsCard] = useState([]);
-  const [isError, setError] = useState(false);
-  const [load, setLoad] = useState(true);
-
-  useEffect(() => {
-    setLoad(true);
-    setError(false);
-
-    const fetchData = async () => {
-      try {
-        const result = await fetchNews(request);
-        setNewsCard(result);
-      } catch (error) {
-        setError(true);
-        return console.error(error);
-      } finally {
-        return setLoad(false);
-      }
-    };
-    fetchData();
-  }, [request, category]);
-
+const NewsCard = ({ data }) => {
   return (
     <>
-      {load ? <ProgressBar /> : null}
       <Grid
         columnGap={18}
         rowGap={10}
@@ -47,23 +15,10 @@ const NewsCard = (request, { category, page }) => {
           md: 'repeat(auto-fit, minmax(300px, 1fr))',
         }}
       >
-        {newsCard
-          ? newsCard.map((article, index) => {
-              return <CardComponents key={index} props={article} />;
-            })
-          : null}
+        {data.map((article, index) => {
+          return <CardComponents key={index} props={article} />;
+        })}
       </Grid>
-      <Flex>
-        {isError
-          ? index => (
-              <Alert status="error" key={index}>
-                <AlertIcon />
-                <AlertTitle mr={2}>Something error please try again</AlertTitle>
-                <CloseButton position="absolute" right="8px" top="8px" />
-              </Alert>
-            )
-          : null}
-      </Flex>
     </>
   );
 };
