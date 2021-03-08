@@ -53,7 +53,6 @@ const links = [
   { name: 'samsung', label: 'Samsung' },
   { name: 'playstation', label: 'PlayStation' },
   { name: 'amazon', label: 'Amazon' },
-  { name: 'iot', label: 'IoT' },
 ];
 
 const Navbar = props => {
