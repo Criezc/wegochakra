@@ -4,6 +4,36 @@ import Logo from './Logo/Logo';
 import MenuToggle from './MenuToggle/MenuToggle';
 import NavBarContainer from './NavbarContainer/NavbarContainer';
 
+// links for category
+const links = [
+  { name: 'technology', label: 'Home' },
+  { name: 'tesla', label: 'Tesla' },
+  { name: 'microsoft', label: 'Microsoft' },
+  { name: 'google', label: 'Google' },
+  { name: 'android', label: 'Android' },
+  { name: 'apple', label: 'Apple' },
+  { name: 'samsung', label: 'Samsung' },
+  { name: 'playstation', label: 'PlayStation' },
+  { name: 'amazon', label: 'Amazon' },
+];
+
+const Navbar = props => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => setIsOpen(!isOpen);
+
+  return (
+    <NavBarContainer {...props}>
+      <Logo />
+      <MenuToggle toggle={toggle} isOpen={isOpen} />
+      <MenuLinks isOpen={isOpen} onSearch={props.onSearch} />
+    </NavBarContainer>
+  );
+};
+
+export default Navbar;
+
+// Menu Item Components
 const MenuItem = ({ children, isLast, to = '/', ...rest }) => {
   return (
     <Link href={to} _hover={{ textDecoration: 'none', color: 'teal.300' }}>
@@ -14,6 +44,7 @@ const MenuItem = ({ children, isLast, to = '/', ...rest }) => {
   );
 };
 
+// MenuLinks Components
 const MenuLinks = ({ isOpen, onSearch }) => {
   return (
     <Box
@@ -42,31 +73,3 @@ const MenuLinks = ({ isOpen, onSearch }) => {
     </Box>
   );
 };
-
-const links = [
-  { name: 'technology', label: 'Home' },
-  { name: 'tesla', label: 'Tesla' },
-  { name: 'microsoft', label: 'Microsoft' },
-  { name: 'google', label: 'Google' },
-  { name: 'android', label: 'Android' },
-  { name: 'apple', label: 'Apple' },
-  { name: 'samsung', label: 'Samsung' },
-  { name: 'playstation', label: 'PlayStation' },
-  { name: 'amazon', label: 'Amazon' },
-];
-
-const Navbar = props => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggle = () => setIsOpen(!isOpen);
-
-  return (
-    <NavBarContainer {...props}>
-      <Logo />
-      <MenuToggle toggle={toggle} isOpen={isOpen} />
-      <MenuLinks isOpen={isOpen} onSearch={props.onSearch} />
-    </NavBarContainer>
-  );
-};
-
-export default Navbar;
