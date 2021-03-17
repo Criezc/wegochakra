@@ -17,7 +17,7 @@ export default function Paginator({ handleClick, page }) {
       }}
     >
       <Flex justifyContent="center">
-        <motion.button whileHover={{ scale: 1.1 }}>
+        <motion.div whileHover={{ scale: 1.1 }}>
           <Stack direction="row" spacing={2} align="center" py={5}>
             <Button
               colorScheme="teal"
@@ -76,8 +76,8 @@ export default function Paginator({ handleClick, page }) {
               <ArrowRightIcon />
             </Button>
           </Stack>
-        </motion.button>
-      </Flex>{' '}
+        </motion.div>
+      </Flex>
     </motion.div>
   );
 }

@@ -15,6 +15,7 @@ const NavBarContainer = ({ children, ...props }) => {
       color={['white', 'white', 'primary.700', 'primary.700']}
       {...props}
       borderTop="6px solid #38b2ac"
+      borderBottom="6px solid #38b2ac"
     >
       {children}
     </Flex>

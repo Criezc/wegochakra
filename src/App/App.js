@@ -8,23 +8,24 @@ import {
   Flex,
   theme,
 } from '@chakra-ui/react';
+import { fetchNews } from '../api/api';
+import { RingLoader } from 'react-spinners';
 import Navbar from '../components/Headers/Header';
 import NewsSection from '../components/NewsSection/NewsSection';
 import Footer from '../components/Footer/Footer';
-import { RingLoader } from 'react-spinners';
-import './App.scss';
 import BackToTop from '../components/BackToTop/Back';
-import { fetchNews } from '../api/api';
+import './App.scss';
 
 function App() {
   const [loading, setLoading] = React.useState(false);
+  const [isError, setIsError] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(true);
   const [data, setData] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [query, setQuery] = React.useState('technology');
-  const [isError, setIsError] = React.useState(false);
-  const [isLoading, setIsLoading] = React.useState(true);
 
-  async function fetchData() {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const fetchData = async () => {
     try {
       setIsLoading(true);
       const result = await fetchNews({
@@ -33,12 +34,11 @@ function App() {
       });
       setData(result);
     } catch (error) {
-      setIsError(true);
-      return console.error(error);
+      setIsError(error);
     } finally {
-      return setIsLoading(false);
+      setIsLoading(false);
     }
-  }
+  };
 
   function handleChangePage(page) {
     setCurrentPage(page);
@@ -54,11 +54,11 @@ function App() {
     setTimeout(() => {
       setLoading(false);
     }, 3000);
-    fetchData();
   }, []);
 
   React.useEffect(() => {
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, query]);
 
   return (
@@ -80,27 +80,25 @@ function App() {
           </Flex>
         ) : (
           <>
-            <Navbar onSearch={handleSearch} />
+            <Navbar changeSearch={handleSearch} />
             <NewsSection
               isLoading={isLoading}
               onChangePage={handleChangePage}
               currentPage={currentPage}
-              onSearch={handleSearch}
+              changeSearch={handleSearch}
               query={query}
               data={data}
             ></NewsSection>
             <Flex>
-              {isError
-                ? index => (
-                    <Alert status="error" key={index}>
-                      <AlertIcon />
-                      <AlertTitle mr={2}>
-                        Something error please try again
-                      </AlertTitle>
-                      <CloseButton position="absolute" right="8px" top="8px" />
-                    </Alert>
-                  )
-                : null}
+              {isError && (
+                <Alert status="error" key={isError}>
+                  <AlertIcon />
+                  <AlertTitle mr={2}>
+                    Something error please try again
+                  </AlertTitle>
+                  <CloseButton position="absolute" right="8px" top="8px" />
+                </Alert>
+              )}
             </Flex>
             <Footer />
             <BackToTop />

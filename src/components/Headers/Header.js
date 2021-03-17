@@ -1,5 +1,4 @@
 import { Box, Stack, Link, Text } from '@chakra-ui/react';
-import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import Logo from './Logo/Logo';
 import MenuToggle from './MenuToggle/MenuToggle';
@@ -27,7 +26,7 @@ const Navbar = props => {
     <NavBarContainer {...props}>
       <Logo />
       <MenuToggle toggle={toggle} isOpen={isOpen} />
-      <MenuLinks isOpen={isOpen} onSearch={props.onSearch} />
+      <MenuLinks isOpen={isOpen} changeSearch={props.changeSearch} />
     </NavBarContainer>
   );
 };
@@ -46,7 +45,7 @@ const MenuItem = ({ children, isLast, to = '/', ...rest }) => {
 };
 
 // MenuLinks Components
-const MenuLinks = ({ isOpen, onSearch }) => {
+const MenuLinks = ({ isOpen, changeSearch }) => {
   return (
     <Box
       display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
@@ -64,7 +63,7 @@ const MenuLinks = ({ isOpen, onSearch }) => {
             key={index}
             onClick={e => {
               e.preventDefault();
-              onSearch(link.name);
+              changeSearch(link.name);
             }}
           >
             {link.label}

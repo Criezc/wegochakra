@@ -9,7 +9,7 @@ const MenuToggle = ({ toggle, isOpen }) => {
     closed: { opacity: 1, x: '-100%' },
   };
   return (
-    <motion.div animate={isOpen ? 'closed' : 'open'} variants={variants}>
+    <motion.button animate={isOpen ? 'closed' : 'open'} variants={variants}>
       <Box display={{ base: 'block', md: 'none' }} onClick={toggle}>
         {isOpen ? (
           <CloseIcon fontSize="xl" />
@@ -17,7 +17,7 @@ const MenuToggle = ({ toggle, isOpen }) => {
           <HamburgerIcon fontSize="3xl" />
         )}
       </Box>
-    </motion.div>
+    </motion.button>
   );
 };
 

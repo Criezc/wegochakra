@@ -12,7 +12,13 @@ export default function Logo(props) {
       }}
     >
       <Box {...props}>
-        <Text fontSize="lg" fontWeight="bold">
+        <Text
+          fontSize={{
+            lg: 'xl',
+            sm: 'lg',
+          }}
+          fontWeight="bold"
+        >
           <a href="/">WEGONEWS</a>
         </Text>
       </Box>

@@ -6,6 +6,7 @@ import './index.scss';
 export default function BackToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const toggleVisible = () => {
     if (window.pageYOffset > 300) {
       setIsVisible(true);
@@ -30,7 +31,7 @@ export default function BackToTop() {
     return () => {
       isMount = false;
     };
-  }, []);
+  }, [toggleVisible]);
 
   return (
     <Box>

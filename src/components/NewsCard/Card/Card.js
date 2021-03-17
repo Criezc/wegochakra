@@ -1,10 +1,10 @@
-import { Badge, Box, Image, Stack, Text } from '@chakra-ui/react';
 import React from 'react';
-import './Card.scss';
+import { Badge, Box, Image, Stack, Text } from '@chakra-ui/react';
 import { notFound } from '../../../Assets/index';
 import { motion } from 'framer-motion';
+import './Card.scss';
 
-const CardComponents = ({ props }) => {
+const CardComponents = React.memo(({ props }) => {
   if (props.author === null) {
     props.author = 'Undefined';
   } else {
@@ -78,6 +78,7 @@ const CardComponents = ({ props }) => {
               textAlign="start"
               lineHeight="short"
               fontFamily="sans-serif"
+              noOfLines={2}
             >
               {props.title}
             </Text>
@@ -100,6 +101,8 @@ const CardComponents = ({ props }) => {
                 colorScheme="teal"
                 ml={1}
                 my={2}
+                textOverflow="ellipsis"
+                noOfLines={[2]}
               >
                 Author : {props.author}
               </Badge>
@@ -109,6 +112,6 @@ const CardComponents = ({ props }) => {
       </a>
     </motion.div>
   );
-};
+});
 
 export default CardComponents;

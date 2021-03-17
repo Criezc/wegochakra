@@ -17,7 +17,9 @@ const NewsSection = props => {
   };
 
   const handleSearchTerm = events => {
-    props.onSearch(events === null || events === '' ? 'technology' : events);
+    props.changeSearch(
+      events === null || events === '' ? 'technology' : events
+    );
   };
 
   return (
