@@ -1,4 +1,5 @@
 import { Box, Stack, Link, Text } from '@chakra-ui/react';
+import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import Logo from './Logo/Logo';
 import MenuToggle from './MenuToggle/MenuToggle';

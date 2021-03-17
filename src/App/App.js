@@ -15,6 +15,7 @@ import { RingLoader } from 'react-spinners';
 import './App.scss';
 import BackToTop from '../components/BackToTop/Back';
 import { fetchNews } from '../api/api';
+import { motion } from 'framer-motion';
 
 function App() {
   const [loading, setLoading] = React.useState(false);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
+import { motion } from 'framer-motion';
 
 const SearchBar = ({ handleChange }) => {
   const [text, setText] = React.useState('');
@@ -44,24 +45,26 @@ const SearchBar = ({ handleChange }) => {
         onChange={handleInput}
         ref={inputRef}
       />
-      <Box
-        as="button"
-        value="submit"
-        bg="teal.400"
-        py={2}
-        px={4}
-        ml={3}
-        rounded="md"
-        fontWeight="semibold"
-        color="white"
-        _hover={{
-          bg: 'teal.600',
-          transition: ' ease-in-out 500ms',
-        }}
-        _focus={{ boxShadow: 'outline' }}
-      >
-        <SearchIcon />
-      </Box>
+      <motion.button whileHover={{ scale: 1.1 }}>
+        <Box
+          as="button"
+          value="submit"
+          bg="teal.400"
+          py={2}
+          px={4}
+          ml={3}
+          rounded="md"
+          fontWeight="semibold"
+          color="white"
+          _hover={{
+            bg: 'teal.600',
+            transition: ' ease-in-out 500ms',
+          }}
+          _focus={{ boxShadow: 'outline' }}
+        >
+          <SearchIcon />
+        </Box>
+      </motion.button>
     </Flex>
   );
 };

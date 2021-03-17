@@ -2,6 +2,7 @@ import { Badge, Box, Image, Stack, Text } from '@chakra-ui/react';
 import React from 'react';
 import './Card.scss';
 import { notFound } from '../../../Assets/index';
+import { motion } from 'framer-motion';
 
 const CardComponents = ({ props }) => {
   if (props.author === null) {
@@ -25,7 +26,17 @@ const CardComponents = ({ props }) => {
   props.urlToImage = props.urlToImage ?? notFound;
 
   return (
-    <>
+    <motion.div
+      initial={{
+        opacity: 0,
+      }}
+      animate={{
+        opacity: 1,
+      }}
+      transition={{
+        duration: 3,
+      }}
+    >
       <a href={props.url} rel="noopener noreferrer" target="_blank">
         <Box
           w="100%"
@@ -96,7 +107,7 @@ const CardComponents = ({ props }) => {
           </Box>
         </Box>
       </a>
-    </>
+    </motion.div>
   );
 };
 
