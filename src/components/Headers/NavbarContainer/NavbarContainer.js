@@ -11,11 +11,10 @@ const NavBarContainer = ({ children, ...props }) => {
       mb={5}
       justifyContent="space-between"
       p={8}
-      bg={['teal.600', 'teal.400', 'transparent', 'transparent']}
+      bg={['teal.600', 'teal.600']}
       color={['white', 'white', 'primary.700', 'primary.700']}
       {...props}
       borderTop="6px solid #38b2ac"
-      borderBottom="6px solid #38b2ac"
     >
       {children}
     </Flex>

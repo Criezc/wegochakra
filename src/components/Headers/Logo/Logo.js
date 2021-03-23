@@ -1,8 +1,23 @@
+/** @jsxRuntime classic */
+/** @jsx jsx */
+
+// eslint-disable-next-line no-unused-vars
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
+import { jsx, css, keyframes } from '@emotion/react';
 
-export default function Logo(props) {
+const floating = keyframes` 
+0%{
+  transform: translateY(0);
+}
+to{
+  transform: translateY(-10px);
+}
+
+`;
+
+const Logo = props => {
   return (
     <motion.div
       animate={{
@@ -19,9 +34,19 @@ export default function Logo(props) {
           }}
           fontWeight="bold"
         >
-          <a href="/">WEGONEWS</a>
+          <a
+            href="/"
+            css={css`
+              animation: ${floating} 1.5s alternate infinite;
+              display: inline-block;
+            `}
+          >
+            WEGONEWS
+          </a>
         </Text>
       </Box>
     </motion.div>
   );
-}
+};
+
+export default Logo;

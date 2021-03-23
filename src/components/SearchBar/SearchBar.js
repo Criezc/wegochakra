@@ -3,7 +3,7 @@ import { Box, Flex } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
 
-const SearchBar = React.memo(({ handleChange }) => {
+const SearchBar = ({ handleChange }) => {
   const [text, setText] = React.useState('');
 
   const inputRef = React.useRef(null);
@@ -67,6 +67,6 @@ const SearchBar = React.memo(({ handleChange }) => {
       </motion.button>
     </Flex>
   );
-});
+};
 
 export default SearchBar;

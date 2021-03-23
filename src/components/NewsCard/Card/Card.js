@@ -4,7 +4,7 @@ import { notFound } from '../../../Assets/index';
 import { motion } from 'framer-motion';
 import './Card.scss';
 
-const CardComponents = React.memo(({ props }) => {
+const CardComponents = ({ props }) => {
   if (props.author === null) {
     props.author = 'Undefined';
   } else {
@@ -112,6 +112,6 @@ const CardComponents = React.memo(({ props }) => {
       </a>
     </motion.div>
   );
-});
+};
 
 export default CardComponents;

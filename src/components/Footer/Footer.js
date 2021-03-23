@@ -7,6 +7,7 @@ const Footer = () => {
       justifyContent="center"
       textAlign="center"
       borderBottom="6px solid #38b2ac"
+      position="relative"
     >
       <Box mt={5} mb={5}>
         <Text fontSize={{ lg: 'xl', md: 'lg' }} textColor="teal.400">

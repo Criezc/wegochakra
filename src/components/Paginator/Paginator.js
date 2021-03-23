@@ -19,14 +19,14 @@ export default function Paginator({ handleClick, page }) {
       <Flex justifyContent="center">
         <motion.div whileHover={{ scale: 1.1 }}>
           <Stack direction="row" spacing={2} align="center" py={5}>
-            <Button
+            {/* <Button
               colorScheme="teal"
-              name="prevTabs"
+              name="tabPrev"
               onClick={handleClick}
               isDisabled={page === 1}
             >
               <ArrowLeftIcon />
-            </Button>
+            </Button> */}
             <Button
               colorScheme="teal"
               name="1"
@@ -69,7 +69,7 @@ export default function Paginator({ handleClick, page }) {
             </Button>
             <Button
               colorScheme="teal"
-              name="nextTabs"
+              name="tabNext"
               onClick={handleClick}
               isDisabled={page === 5}
             >

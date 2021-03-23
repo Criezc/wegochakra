@@ -1,3 +1,5 @@
+/** @jsxRuntime classic */
+/** @jsx jsx */
 import React from 'react';
 import {
   Alert,
@@ -8,6 +10,7 @@ import {
   Flex,
   theme,
 } from '@chakra-ui/react';
+import { jsx, css } from '@emotion/react';
 import { fetchNews } from '../api/api';
 import { RingLoader } from 'react-spinners';
 import Navbar from '../components/Headers/Header';
@@ -17,12 +20,12 @@ import BackToTop from '../components/BackToTop/Back';
 import './App.scss';
 
 function App() {
-  const [loading, setLoading] = React.useState(false);
-  const [isError, setIsError] = React.useState(null);
-  const [isLoading, setIsLoading] = React.useState(true);
   const [data, setData] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(1);
   const [query, setQuery] = React.useState('technology');
+  const [loading, setLoading] = React.useState(false);
+  const [isError, setIsError] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchData = async () => {
@@ -61,9 +64,22 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, query]);
 
+  const style = css`
+    html {
+      line-height: 1.5px;
+      scroll-behavior: smooth;
+    }
+    background: radial-gradient(
+      ellipse at center,
+      rgb(26, 32, 44) 0%,
+      rgb(26, 32, 44) 35%
+    );
+    overflow: hidden;
+  `;
+
   return (
     <ChakraProvider theme={theme}>
-      <div className="bg__global">
+      <div css={style}>
         {loading ? (
           <Flex
             justifyContent="center"
@@ -100,6 +116,12 @@ function App() {
                 </Alert>
               )}
             </Flex>
+            <div>
+              <div className="wave wave1"></div>
+              <div className="wave wave2"></div>
+              <div className="wave wave3"></div>
+              <div className="wave wave4"></div>
+            </div>
             <Footer />
             <BackToTop />
           </>

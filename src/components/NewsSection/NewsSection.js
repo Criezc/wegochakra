@@ -5,15 +5,19 @@ import SearchBar from '../SearchBar/SearchBar';
 import ProgressBar from '../ProgressBar/ProgressBar';
 
 const NewsSection = props => {
+  // SPACE
+
   const handlePage = events => {
     const paginate = events.target.name;
-    if (paginate === 'nextTabs' && props.currentPage < 5) {
+    if (paginate === 'tabNext' && props.currentPage < 5) {
       props.onChangePage(this.props.currentPage + 1);
-    } else if (paginate === 'prevTabs' && props.currentPage > 1) {
+    } else if (paginate === 'tabPrev' && props.currentPage > 1) {
       props.onChangePage(this.props.currentPage - 1);
-    } else if (paginate !== 'nextTabs' && paginate !== 'prevTabs') {
+    } else if (paginate !== 'tabNext' && paginate !== 'tabPrev') {
       props.onChangePage(parseInt(paginate));
     }
+
+    console.log(paginate);
   };
 
   const handleSearchTerm = events => {
