@@ -1,39 +1,50 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import NewsCard from '../NewsCard/NewsCard';
 import Paginator from '../Paginator/Paginator';
 import SearchBar from '../SearchBar/SearchBar';
 import ProgressBar from '../ProgressBar/ProgressBar';
 
-const NewsSection = props => {
+const NewsSection = ({
+  currPage,
+  changePage,
+  newData,
+  isLoading,
+  newSearch,
+}) => {
   // SPACE
 
   const handlePage = events => {
-    const paginate = events.target.name;
-    if (paginate === 'tabNext' && props.currentPage < 5) {
-      props.onChangePage(this.props.currentPage + 1);
-    } else if (paginate === 'tabPrev' && props.currentPage > 1) {
-      props.onChangePage(this.props.currentPage - 1);
+    const paginate = events.target.value;
+    if (paginate === 'tabNext' && currPage < 5) {
+      changePage(currPage + 1);
+    } else if (paginate === 'tabPrev' && currPage > 1) {
+      changePage(currPage - 1);
     } else if (paginate !== 'tabNext' && paginate !== 'tabPrev') {
-      props.onChangePage(parseInt(paginate));
+      changePage(parseInt(paginate));
     }
-
-    console.log(paginate);
   };
 
   const handleSearchTerm = events => {
-    props.changeSearch(
-      events === null || events === '' ? 'technology' : events
-    );
+    newSearch(events === null || events === '' ? 'technology' : events);
   };
 
   return (
     <>
       <SearchBar handleChange={handleSearchTerm} />
-      <Paginator page={props.currentPage} handleClick={handlePage} />
-      {props.isLoading ? <ProgressBar /> : null}
-      <NewsCard category="top-headlines" data={props.data} />
+      <Paginator page={currPage} handleClick={handlePage} />
+      {isLoading ? <ProgressBar /> : null}
+      <NewsCard category="top-headlines" data={newData} />
     </>
   );
+};
+
+NewsSection.propTypes = {
+  currPage: PropTypes.number,
+  changePage: PropTypes.func,
+  newData: PropTypes.array,
+  isLoading: PropTypes.bool,
+  newSearch: PropTypes.func,
 };
 
 export default NewsSection;

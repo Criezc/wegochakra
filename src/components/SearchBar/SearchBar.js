@@ -1,7 +1,9 @@
 import React from 'react';
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, createStandaloneToast } from '@chakra-ui/react';
 import { SearchIcon } from '@chakra-ui/icons';
 import { motion } from 'framer-motion';
+
+const toast = createStandaloneToast();
 
 const SearchBar = ({ handleChange }) => {
   const [text, setText] = React.useState('');
@@ -20,7 +22,18 @@ const SearchBar = ({ handleChange }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
+    if (!text) {
+      toast({
+        title: 'No Blank Search !',
+        position: 'top',
+        status: 'warning',
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
     handleChange(text);
+    setText('');
   };
 
   return (
@@ -44,6 +57,7 @@ const SearchBar = ({ handleChange }) => {
         }}
         onChange={handleInput}
         ref={inputRef}
+        value={text}
       />
       <motion.button whileHover={{ scale: 1.1 }}>
         <Box

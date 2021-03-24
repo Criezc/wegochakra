@@ -19,17 +19,17 @@ export default function Paginator({ handleClick, page }) {
       <Flex justifyContent="center">
         <motion.div whileHover={{ scale: 1.1 }}>
           <Stack direction="row" spacing={2} align="center" py={5}>
-            {/* <Button
+            <Button
               colorScheme="teal"
-              name="tabPrev"
+              value="tabPrev"
               onClick={handleClick}
               isDisabled={page === 1}
             >
               <ArrowLeftIcon />
-            </Button> */}
+            </Button>
             <Button
               colorScheme="teal"
-              name="1"
+              value="1"
               onClick={handleClick}
               isActive={page === 1}
             >
@@ -37,7 +37,7 @@ export default function Paginator({ handleClick, page }) {
             </Button>
             <Button
               colorScheme="teal"
-              name="2"
+              value="2"
               onClick={handleClick}
               isActive={page === 2}
             >
@@ -45,7 +45,7 @@ export default function Paginator({ handleClick, page }) {
             </Button>
             <Button
               colorScheme="teal"
-              name="3"
+              value="3"
               onClick={handleClick}
               isActive={page === 3}
             >
@@ -53,14 +53,14 @@ export default function Paginator({ handleClick, page }) {
             </Button>
             <Button
               colorScheme="teal"
-              name="4"
+              value="4"
               onClick={handleClick}
               isActive={page === 4}
             >
               4
             </Button>
             <Button
-              name="5"
+              value="5"
               onClick={handleClick}
               colorScheme="teal"
               isActive={page === 5}
@@ -69,7 +69,7 @@ export default function Paginator({ handleClick, page }) {
             </Button>
             <Button
               colorScheme="teal"
-              name="tabNext"
+              value="tabNext"
               onClick={handleClick}
               isDisabled={page === 5}
             >

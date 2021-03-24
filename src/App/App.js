@@ -99,11 +99,11 @@ function App() {
             <Navbar changeSearch={handleSearch} />
             <NewsSection
               isLoading={isLoading}
-              onChangePage={handleChangePage}
-              currentPage={currentPage}
+              currPage={currentPage}
+              changePage={handleChangePage}
               changeSearch={handleSearch}
               query={query}
-              data={data}
+              newData={data}
             ></NewsSection>
             <Flex>
               {isError && (

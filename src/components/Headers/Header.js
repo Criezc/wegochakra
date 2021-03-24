@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Logo from './Logo/Logo';
 import MenuToggle from './MenuToggle/MenuToggle';
 import NavBarContainer from './NavbarContainer/NavbarContainer';
+import PropTypes from 'prop-types';
 
 // links for category
 const links = [
@@ -17,18 +18,22 @@ const links = [
   { name: 'amazon', label: 'Amazon' },
 ];
 
-const Navbar = props => {
+const Navbar = ({ changeSearch }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <NavBarContainer {...props}>
+    <NavBarContainer>
       <Logo />
       <MenuToggle toggle={toggle} isOpen={isOpen} />
-      <MenuLinks isOpen={isOpen} changeSearch={props.changeSearch} />
+      <MenuLinks isOpen={isOpen} changeSearch={changeSearch} />
     </NavBarContainer>
   );
+};
+
+Navbar.propTypes = {
+  changeSearch: PropTypes.func,
 };
 
 export default Navbar;

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Flex } from '@chakra-ui/react';
+import PropTypes from 'prop-types';
 
-const NavBarContainer = ({ children, ...props }) => {
+const NavBarContainer = ({ children }) => {
   return (
     <Flex
       as="nav"
@@ -13,12 +14,15 @@ const NavBarContainer = ({ children, ...props }) => {
       p={8}
       bg={['teal.600', 'teal.600']}
       color={['white', 'white', 'primary.700', 'primary.700']}
-      {...props}
       borderTop="6px solid #38b2ac"
     >
       {children}
     </Flex>
   );
+};
+
+NavBarContainer.propTypes = {
+  children: PropTypes.node,
 };
 
 export default NavBarContainer;
