@@ -101,7 +101,7 @@ function App() {
               isLoading={isLoading}
               currPage={currentPage}
               changePage={handleChangePage}
-              changeSearch={handleSearch}
+              newSearch={handleSearch}
               query={query}
               newData={data}
             ></NewsSection>

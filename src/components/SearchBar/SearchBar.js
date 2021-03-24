@@ -59,7 +59,8 @@ const SearchBar = ({ handleChange }) => {
         ref={inputRef}
         value={text}
       />
-      <motion.button whileHover={{ scale: 1.1 }}>
+
+      <motion.div whileHover={{ scale: 1.1 }}>
         <Box
           as="button"
           value="submit"
@@ -78,7 +79,7 @@ const SearchBar = ({ handleChange }) => {
         >
           <SearchIcon />
         </Box>
-      </motion.button>
+      </motion.div>
     </Flex>
   );
 };
