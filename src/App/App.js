@@ -17,7 +17,7 @@ import Navbar from '../components/Headers/Header';
 import NewsSection from '../components/NewsSection/NewsSection';
 import Footer from '../components/Footer/Footer';
 import BackToTop from '../components/BackToTop/Back';
-import './App.scss';
+import Wave from '../components/Wave/Wave';
 
 function App() {
   const [data, setData] = React.useState([]);
@@ -116,12 +116,7 @@ function App() {
                 </Alert>
               )}
             </Flex>
-            <div>
-              <div className="wave wave1"></div>
-              <div className="wave wave2"></div>
-              <div className="wave wave3"></div>
-              <div className="wave wave4"></div>
-            </div>
+            <Wave />
             <Footer />
             <BackToTop />
           </>
