@@ -96,7 +96,7 @@ function App() {
               query={query}
               newData={data}
             ></NewsSection>
-            <Flex>{isError && <Error />}</Flex>
+            {isError && <Error />}
             <Wave />
             <Footer />
             <BackToTop />
