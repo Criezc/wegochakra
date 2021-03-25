@@ -15,7 +15,7 @@ const Navbar = ({ changeSearch }) => {
     <NavBarContainer>
       <Logo />
       <MenuToggle toggle={toggle} isOpen={isOpen} />
-      <MenuLinks isOpen={isOpen} changeSearch={changeSearch} />
+      <MenuLinks isOpen={isOpen} changeSearch={changeSearch} toggle={toggle} />
     </NavBarContainer>
   );
 };
@@ -38,7 +38,7 @@ const MenuItem = ({ children, isLast, to = '/', ...rest }) => {
 };
 
 // MenuLinks Components
-const MenuLinks = ({ isOpen, changeSearch }) => {
+const MenuLinks = ({ isOpen, changeSearch, toggle }) => {
   return (
     <Box
       display={{ base: isOpen ? 'block' : 'none', md: 'block' }}
@@ -57,6 +57,7 @@ const MenuLinks = ({ isOpen, changeSearch }) => {
             onClick={e => {
               e.preventDefault();
               changeSearch(link.name);
+              toggle();
             }}
           >
             {link.label}
