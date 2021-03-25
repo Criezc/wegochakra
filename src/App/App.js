@@ -1,14 +1,7 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
 import React, { useEffect } from 'react';
-import {
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  ChakraProvider,
-  Flex,
-  theme,
-} from '@chakra-ui/react';
+import { ChakraProvider, Flex, theme } from '@chakra-ui/react';
 import { jsx, css } from '@emotion/react';
 import { fetchNews } from '../Services/Service';
 import { RingLoader } from 'react-spinners';
@@ -17,6 +10,7 @@ import NewsSection from '../components/NewsSection/NewsSection';
 import Footer from '../components/Footer/Footer';
 import BackToTop from '../components/BackToTop/Back';
 import Wave from '../components/Wave/Wave';
+import Error from '../components/Error/Error';
 
 function App() {
   const [data, setData] = React.useState([]);
@@ -102,16 +96,7 @@ function App() {
               query={query}
               newData={data}
             ></NewsSection>
-            <Flex>
-              {isError && (
-                <Alert status="error" key={isError}>
-                  <AlertIcon />
-                  <AlertTitle mr={2}>
-                    Something error please try again
-                  </AlertTitle>
-                </Alert>
-              )}
-            </Flex>
+            <Flex>{isError && <Error />}</Flex>
             <Wave />
             <Footer />
             <BackToTop />
