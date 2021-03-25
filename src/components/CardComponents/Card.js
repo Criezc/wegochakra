@@ -1,29 +1,30 @@
 import React from 'react';
 import { Badge, Box, Image, Stack, Text } from '@chakra-ui/react';
-import { notFound } from '../../../Assets/index';
+import { notFound } from '../../Assets/index';
 import { motion } from 'framer-motion';
 import './Card.scss';
+import { formatDate } from '../../utils/DateFormat';
+import PropTypes from 'prop-types';
 
-const CardComponents = ({ props }) => {
-  if (props.author === null) {
-    props.author = 'Undefined';
+const CardComponents = ({
+  src,
+  title,
+  publishedAt,
+  author,
+  sourceName,
+  description,
+  url,
+}) => {
+  if (author === null) {
+    author = 'Undefined';
   } else {
-    if (props.author.search(/(https:)|(http:)/i) === 0) {
-      const x = props.author.split('/');
-      props.author = x[x.length - 1];
+    if (author.search(/(https:)|(http:)/i) === 0) {
+      const x = author.split('/');
+      author = x[x.length - 1];
     }
   }
 
-  let options = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  };
-  props.publishedAt = new Date(props.publishedAt).toLocaleDateString(
-    'en-EN',
-    options
-  );
-  props.urlToImage = props.urlToImage ?? notFound;
+  src = src ?? notFound;
 
   return (
     <motion.div
@@ -37,7 +38,7 @@ const CardComponents = ({ props }) => {
         duration: 3,
       }}
     >
-      <a href={props.url} rel="noopener noreferrer" target="_blank">
+      <a href={url} rel="noopener noreferrer" target="_blank">
         <Box
           w="100%"
           rounded="20px"
@@ -49,8 +50,8 @@ const CardComponents = ({ props }) => {
           boxSizing="border-box"
         >
           <Image
-            alt={props.author}
-            src={props.urlToImage}
+            alt={author}
+            src={src}
             loading="lazy"
             mb={5}
             objectFit="cover"
@@ -63,10 +64,10 @@ const CardComponents = ({ props }) => {
           <Box>
             <Stack isInline align="baseline">
               <Badge variant="solid" rounded="full" colorScheme="teal" ml={5}>
-                {props.source.name}
+                {sourceName}
               </Badge>
               <Badge variant="solid" rounded="full" colorScheme="teal">
-                {props.publishedAt}
+                {formatDate(publishedAt)}
               </Badge>
             </Stack>
             <Text
@@ -80,7 +81,7 @@ const CardComponents = ({ props }) => {
               fontFamily="sans-serif"
               noOfLines={2}
             >
-              {props.title}
+              {title}
             </Text>
             <Text
               fontSize="md"
@@ -91,7 +92,7 @@ const CardComponents = ({ props }) => {
               fontFamily="mono"
               noOfLines={[3, 4]}
             >
-              {props.description}
+              {description}
             </Text>
             <Stack isInline align="baseline">
               <Badge
@@ -104,7 +105,7 @@ const CardComponents = ({ props }) => {
                 textOverflow="ellipsis"
                 noOfLines={[2]}
               >
-                Author : {props.author}
+                Author : {author}
               </Badge>
             </Stack>
           </Box>
@@ -112,6 +113,16 @@ const CardComponents = ({ props }) => {
       </a>
     </motion.div>
   );
+};
+
+CardComponents.propTypes = {
+  src: PropTypes.string,
+  title: PropTypes.string,
+  publishedAt: PropTypes.string,
+  author: PropTypes.string,
+  sourceName: PropTypes.string,
+  description: PropTypes.string,
+  url: PropTypes.string,
 };
 
 export default CardComponents;

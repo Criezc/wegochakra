@@ -1,17 +1,16 @@
 /** @jsxRuntime classic */
 /** @jsx jsx */
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Alert,
   AlertIcon,
   AlertTitle,
   ChakraProvider,
-  CloseButton,
   Flex,
   theme,
 } from '@chakra-ui/react';
 import { jsx, css } from '@emotion/react';
-import { fetchNews } from '../api/api';
+import { fetchNews } from '../Services/Service';
 import { RingLoader } from 'react-spinners';
 import Navbar from '../components/Headers/Header';
 import NewsSection from '../components/NewsSection/NewsSection';
@@ -27,21 +26,24 @@ function App() {
   const [isError, setIsError] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(true);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const fetchData = async () => {
-    try {
-      setIsLoading(true);
-      const result = await fetchNews({
-        q: query,
-        page: currentPage,
-      });
-      setData(result);
-    } catch (error) {
-      setIsError(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  useEffect(() => {
+    const getNews = async () => {
+      try {
+        setIsLoading(true);
+        const res = await fetchNews({
+          q: query,
+          page: currentPage,
+        });
+        setData(res);
+      } catch (error) {
+        console.error(error);
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getNews();
+  }, [query, currentPage]);
 
   function handleChangePage(page) {
     setCurrentPage(page);
@@ -58,11 +60,6 @@ function App() {
       setLoading(false);
     }, 3000);
   }, []);
-
-  React.useEffect(() => {
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [currentPage, query]);
 
   const style = css`
     html {
@@ -112,7 +109,6 @@ function App() {
                   <AlertTitle mr={2}>
                     Something error please try again
                   </AlertTitle>
-                  <CloseButton position="absolute" right="8px" top="8px" />
                 </Alert>
               )}
             </Flex>

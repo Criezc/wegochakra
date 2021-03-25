@@ -4,19 +4,7 @@ import Logo from './Logo/Logo';
 import MenuToggle from './MenuToggle/MenuToggle';
 import NavBarContainer from './NavbarContainer/NavbarContainer';
 import PropTypes from 'prop-types';
-
-// links for category
-const links = [
-  { name: 'technology', label: 'Home' },
-  { name: 'tesla', label: 'Tesla' },
-  { name: 'microsoft', label: 'Microsoft' },
-  { name: 'google', label: 'Google' },
-  { name: 'android', label: 'Android' },
-  { name: 'apple', label: 'Apple' },
-  { name: 'samsung', label: 'Samsung' },
-  { name: 'playstation', label: 'PlayStation' },
-  { name: 'amazon', label: 'Amazon' },
-];
+import { LINKS } from '../../utils/Categories';
 
 const Navbar = ({ changeSearch }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -63,7 +51,7 @@ const MenuLinks = ({ isOpen, changeSearch }) => {
         direction={['column', 'row', 'row', 'row']}
         pt={[4, 4, 0, 0]}
       >
-        {links.map((link, index) => (
+        {LINKS.map((link, index) => (
           <MenuItem
             key={index}
             onClick={e => {
